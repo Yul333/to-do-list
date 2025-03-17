@@ -24,22 +24,22 @@ const TaskList = () => {
         fetchTasks();
     }, []);
 
-    const fetchTasks = async () => {
+
         const fetchTasks = async () => {
             setIsLoading(true);
-        try {
-            //get from DB
-            const {data} = await axios.get("api/tasks");
-            //store in local state
-            setTasks(data.data);
-            setError(null);
-        } catch (error) {
-            console.error("Error fetching tasks", error);
-            setError("Failed to fetch tasks. Please try again.")
-        } finally {
-            setIsLoading(false);
-        }
-    };
+            try {
+                //get from DB
+                const {data} = await axios.get("api/tasks");
+                //store in local state
+                setTasks(data.data);
+                setError(null);
+            } catch (error) {
+                console.error("Error fetching tasks", error);
+                setError("Failed to fetch tasks. Please try again.")
+            } finally {
+                setIsLoading(false);
+            }
+        };
         if (isLoading) {
             return <p>Loading tasks...</p>;
         }
@@ -51,11 +51,11 @@ const TaskList = () => {
         return (
             <div>
                 {tasks.length === 0 ? (
-                        <p>No tasks here yet</p>
-        ) : (
-            tasks.map((task) => <TaskItem key={task._id} task={task} />)
-    )}
-        </div>
-    );
-
-    export default TaskList;
+                    <p>No tasks here yet</p>
+                ) : (
+                    tasks.map((task) => <TaskItem key={task._id} task={task}/>)
+                )}
+            </div>
+        );
+    }
+        export default TaskList;
