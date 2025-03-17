@@ -27,11 +27,25 @@ const TaskList = () => {
             }
 
             const formattedTasks = response.data.map((task: any) => ({
-                ...task,
-                dueDate: task.dueDate ? new Date(task.dueDate).toISOString() : "",
+                _id: task._id,
+                name: task.name,
+                description: task.description || "No description",  // Ensure it is always there
+                status: task.status,
+                dueDate: task.dueDate ? new Date(task.dueDate) : null,
             }));
 
-            setTasks(formattedTasks);
+
+            setTasks(
+                formattedTasks.sort((a, b) => {
+                    const dateA = a.dueDate ? a.dueDate.getTime() : 0; // Use 0 for missing dates
+                    const dateB = b.dueDate ? b.dueDate.getTime() : 0;
+                    return dateB - dateA; // Sort newest first
+                })
+            );
+
+            console.log("Before Sorting:", formattedTasks.map(t => ({ name: t.name, dueDate: t.dueDate })));
+
+
             setError(null);
         } catch (error) {
             console.error("Error fetching tasks:", error);

@@ -57,10 +57,14 @@ const TaskItem = ({ task, onTaskUpdate }: TaskItemProps) => {
     return (
         <div className={`${styles.taskItem} ${theme === "dark" ? styles.dark : styles.light}`}>
             <h3 className={styles.title}>{task.name}</h3>
+            <p className={styles.description}>{task.description}</p>
             <p className={task.status === "complete" ? styles.statusComplete : styles.statusInProgress}>
                 {task.status === "complete" ? "✅ Complete" : "🟠 In Progress"}
             </p>
-            <p className={styles.dueDate}>Due: {task.dueDate || "Not set"}</p>
+            <p className={styles.dueDate}>
+                Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString("en-GB") : "Not set"}
+            </p>
+
 
             <div className={styles.actions}>
                 <button onClick={handleToggleStatus} className={styles.toggleButton}>
