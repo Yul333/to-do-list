@@ -1,0 +1,37 @@
+/* Task card styles */
+.taskItem {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+.light {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+/* Dark Mode */
+.dark {
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid white;
+}
+
+
+.title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.statusComplete {
+    color: green;
+    font-weight: bold;
+}
+
+.statusInProgress {
+    color: orange;
+    font-weight: bold;
+}

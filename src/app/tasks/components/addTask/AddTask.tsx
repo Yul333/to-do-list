@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { Task } from "./TaskItem";
+import { Task } from "../taskItem/TaskItem";
 
 interface AddTaskProps {
     onTaskAdded: () => void;

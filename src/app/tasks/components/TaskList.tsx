@@ -1,61 +1,72 @@
-"use client"
+"use client";
 
 import axios from "axios";
-import {useEffect, useState} from "react";
-import TaskItem from "./TaskItem";
+import React, { useEffect, useState } from "react";
+import TaskItem from "./taskItem/TaskItem";
 
 export type Task = {
     _id: string;
     name: string;
     description: string;
     status: "in_progress" | "complete";
-    dueDate?: Date;
+    dueDate?: string;
 };
 
-//temporary local state
 const TaskList = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    const fetchTasks = async () => {
+        try {
+            const response = await axios.get("/api/tasks");
+            console.log("API Response:", response.data);
 
-    //fetches data from mongoDB API on first render
+            if (!response.data || !response.data) {
+                throw new Error("Invalid response format");
+            }
+
+            const formattedTasks = response.data.map((task: any) => ({
+                ...task,
+                dueDate: task.dueDate ? new Date(task.dueDate).toISOString() : "",
+            }));
+
+            setTasks(formattedTasks);
+            setError(null);
+        } catch (error) {
+            console.error("Error fetching tasks:", error);
+            setError("Failed to load tasks. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
     useEffect(() => {
         fetchTasks();
     }, []);
 
-
-        const fetchTasks = async () => {
-            setIsLoading(true);
-            try {
-                //get from DB
-                const {data} = await axios.get("api/tasks");
-                //store in local state
-                setTasks(data.data);
-                setError(null);
-            } catch (error) {
-                console.error("Error fetching tasks", error);
-                setError("Failed to fetch tasks. Please try again.")
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        if (isLoading) {
-            return <p>Loading tasks...</p>;
-        }
-
-        if (error) {
-            return <p>{error}</p>;
-        }
-
-        return (
-            <div>
-                {tasks.length === 0 ? (
-                    <p>No tasks here yet</p>
-                ) : (
-                    tasks.map((task) => <TaskItem key={task._id} task={task}/>)
-                )}
-            </div>
-        );
+    //show loading state
+    if (isLoading) {
+        return <p>Loading tasks...</p>;
     }
-        export default TaskList;
+
+    //show error state
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    return (
+        <div>
+            {tasks.length === 0 ? (
+                <p>No tasks here yet</p>
+            ) : (
+                tasks.map((task) => (
+                    <TaskItem key={task._id} task={task} onTaskUpdate={fetchTasks} />
+                ))
+            )}
+        </div>
+    );
+};
+
+export default TaskList;
