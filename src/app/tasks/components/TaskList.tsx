@@ -9,7 +9,7 @@ export type Task = {
     name: string;
     description: string;
     status: "in_progress" | "complete";
-    dueDate: Date;
+    dueDate?: Date;
 };
 
 //temporary local state
