@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 
 // Define the Task interface (ensure this matches the API and TaskList export)
-interface Task {
+export interface Task {
     _id: string;
     name: string;
     description: string;
@@ -213,7 +213,7 @@ const TaskItem = ({ task, onTaskUpdate }: TaskItemProps) => {
         <p className="task-description">{task.description}</p>
 
             <div className="task-footer">
-        <span className="task-due-date">Due: {task.dueDate || "Not set"}</span>
+        <span className="task-due-date">Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "Not set"}</span>
         <div className="task-actions">
         <button
             onClick={handleToggleStatus}
