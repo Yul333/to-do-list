@@ -2,14 +2,17 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
+
+//context with default values
 const ThemeContext = createContext({
     theme: "dark",
     toggleTheme: () => {},
 });
-
+//wraps app and provides theme functionality
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const [theme, setTheme] = useState("dark");
 
+    //update the HTML attribute when theme changes
     useEffect(() => {
         document.documentElement.setAttribute("data-theme", theme);
     }, [theme]);

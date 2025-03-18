@@ -1,23 +1,27 @@
 "use client";
 
 import AddTask from "./tasks/components/addTask/AddTask";
-import TaskList from "./tasks/components/TaskList";
+import TaskList from "./tasks/components/taskList/TaskList";
 import { useState } from "react";
 import DarkModeToggle from "./tasks/components/DarkModeToggle";
 
 export default function ToDoPage() {
-    const [taskRefreshKey, setTaskRefreshKey] = useState(0); // ✅ Force re-render on new task
+    const [taskRefreshKey, setTaskRefreshKey] = useState(0);
 
+    //updates key to trigger re-render
     const refreshTasks = () => {
-        setTaskRefreshKey((prev) => prev + 1); // ✅ Updates key to trigger re-render
+        setTaskRefreshKey((prev) => prev + 1);
     };
 
     return (
         <div>
-            <h1>To-Do-List</h1>
-            <DarkModeToggle />
-            <AddTask onTaskAdded={refreshTasks} /> {/* ✅ Pass the prop */}
-            <TaskList key={taskRefreshKey} /> {/* ✅ Re-renders when tasks are added */}
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px'}}>
+                <h1>To-Do-List</h1>
+                <DarkModeToggle/>
+            </div>
+            <AddTask onTaskAdded={refreshTasks}/>
+            {/*re-renders when tasks are added */}
+            <TaskList key={taskRefreshKey}/>
         </div>
     );
 }

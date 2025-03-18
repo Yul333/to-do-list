@@ -1,37 +1,173 @@
-/* Task card styles */
+/* TaskItem.module.css */
+
 .taskItem {
-    padding: 15px;
+    padding: 20px;
     border-radius: 8px;
-    margin: 10px;
+    margin: 15px auto;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 90%; /* Increased width to 90% of container */
+    max-width: 800px; /* Increased max-width from 600px */
+    box-sizing: border-box;
 }
 
-/* Light Mode */
 .light {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
 }
 
-/* Dark Mode */
 .dark {
     background-color: #1e1e1e;
     color: white;
-    border: 1px solid white;
+    border: 1px solid #444;
 }
-
 
 .title {
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.3em; /* Slightly larger font */
+    margin: 0;
+}
+
+.description {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1.05em; /* Slightly larger text */
 }
 
 .statusComplete {
     color: green;
     font-weight: bold;
+    margin: 5px 0;
+    font-size: 1.05em;
 }
 
 .statusInProgress {
     color: orange;
     font-weight: bold;
+    margin: 5px 0;
+    font-size: 1.05em;
+}
+
+.dueDate {
+    color: #777;
+    margin: 5px 0;
+    font-size: 1.05em;
+}
+
+.actionsStacked {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.toggleButton {
+    width: 100%;
+    padding: 12px; /* Taller buttons */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.05em;
+}
+
+.editButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ffc107;
+    color: black;
+    font-size: 1.05em;
+}
+
+.deleteButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #dc3545;
+    color: white;
+    font-size: 1.05em;
+}
+
+.editMode {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: 15px auto;
+    box-sizing: border-box;
+}
+
+.editInput {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.05em;
+}
+
+.editTextarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    min-height: 120px;
+    resize: vertical;
+    font-size: 1.05em;
+}
+
+.editSelect {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.05em;
+}
+
+.saveButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    font-size: 1.05em;
+}
+
+.cancelButton {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #dc3545;
+    color: white;
+    font-size: 1.05em;
+}
+
+.formGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px;
 }

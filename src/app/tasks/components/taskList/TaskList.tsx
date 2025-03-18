@@ -2,7 +2,8 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TaskItem from "./taskItem/TaskItem";
+import TaskItem from "../taskItem/TaskItem";
+import styles from "./TaskList.module.css";
 
 export type Task = {
     _id: string;
@@ -76,31 +77,39 @@ const TaskList = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-                <select
-                    value={statusFilter}
-                    onChange={(e) => setStatusFilter(e.target.value as "all" | "in_progress" | "complete")}
-                >
-                    <option value="all">All Tasks</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="complete">Completed</option>
-                </select>
+        <div className={styles.taskListContainer}>
+            <div className={styles.filtersContainer}>
+                <div className={styles.filterItem}>
+                    <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value as "all" | "in_progress" | "complete")}
+                        className={styles.filterSelect}
+                    >
+                        <option value="all">All Tasks</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="complete">Completed</option>
+                    </select>
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="Search tasks..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
+                <div className={styles.filterItem}>
+                    <input
+                        type="text"
+                        placeholder="Search tasks..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className={styles.searchInput}
+                    />
+                </div>
             </div>
 
             {filteredTasks.length === 0 ? (
-                <p>No tasks found</p>
+                <p className={styles.noTasksMessage}>No tasks found</p>
             ) : (
-                filteredTasks.map((task) => (
-                    <TaskItem key={task._id} task={task} onTaskUpdate={fetchTasks} />
-                ))
+                <div className={styles.tasksList}>
+                    {filteredTasks.map((task) => (
+                        <TaskItem key={task._id} task={task} onTaskUpdate={fetchTasks}/>
+                    ))}
+                </div>
             )}
         </div>
     );
